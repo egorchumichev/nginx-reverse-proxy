@@ -5,6 +5,11 @@ services:
     build:
       context: ./../
       dockerfile: dockerfile
+      args:
+        - DEPLOY_PRIMARY_DOMAIN=${DEPLOY_PRIMARY_DOMAIN}
+        - DEPLOY_DOMAINS=${DEPLOY_DOMAINS}
+        - DEPLOY_DOMAINS_MAPPER=${DEPLOY_DOMAINS_MAPPER}
+        - DEPLOY_EMAIL=${DEPLOY_EMAIL}
     ports:
       - 80:80
       - 443:443
