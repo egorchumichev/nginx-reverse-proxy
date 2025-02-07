@@ -1,0 +1,18 @@
+FROM certbot/certbot:latest AS validator
+
+ARG DEPLOY_DOMAIN
+ARG DEPLOY_SUBDOMAINS
+ARG DEPLOY_EMAIL
+
+RUN certbot certonly --standalone --non-interactive \
+  --agree-tos --preferred-challenges http \
+  --email ${DEPLOY_EMAIL} -d "${DEPLOY_DOMAIN} ${DEPLOY_DOMAINS}"
+
+FROM nginx:latest AS runner
+
+COPY --from=validator /etc/letsencrypt/live/$DOMAIN/fullchain.pem /etc/nginx/ssl/fullchain.pem
+COPY --from=validator /etc/letsencrypt/live/$DOMAIN/privkey.pem /etc/nginx/ssl/privkey.pem
+
+EXPOSE 80 443
+
+CMD ["nginx", "-g", "daemon off;"]
