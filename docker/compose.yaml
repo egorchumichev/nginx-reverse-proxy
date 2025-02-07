@@ -1,0 +1,22 @@
+name: reverse-proxy
+
+services:
+  application:
+    build:
+      context: ./../
+      dockerfile: dockerfile
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - reverse-proxy-logs:/var/logs/nginx/
+    networks:
+      - reverse-proxy-network
+
+networks:
+  reverse-proxy-network:
+    name: reverse-proxy-network
+
+volumes:
+  reverse-proxy-logs:
+    name: reverse-proxy-logs
