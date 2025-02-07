@@ -1,0 +1,8 @@
+# IntelliJ IDEA project
+.idea
+
+# Visual Studio Code project
+.vscode
+
+# MacOS Finder configuration
+.DS_Store
