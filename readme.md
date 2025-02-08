@@ -4,15 +4,19 @@ This repository contains the configuration for Nginx acting as a Reverse Proxy. 
 
 ## Deployment
 
-Application supposed to be run in Docker Container.
+The application is intended to run in a Docker container.
 
-Firstly, create `server-certifcates` volume to store SSL certificates:
+### Create Docker Volume
+
+Create a `server-certificates` volume to store SSL certificates:
 
 ```bash
 sudo docker volume create server-certificates
 ```
 
-Then obtain Let's Encrypt certificates:
+### Obtain SSL Certificates
+
+Obtain Let's Encrypt certificates using the following command:
 
 ```bash
 sudo docker run --rm -v server-certificates:/etc/letsencrypt certonly --standalone --non-interactive \
@@ -23,4 +27,4 @@ sudo docker run --rm -v server-certificates:/etc/letsencrypt certonly --standalo
 
 ## Author
 
-Configured by Egor Chumichev.
+Configured by Egor Chumichev. Feel free to modify this template.
