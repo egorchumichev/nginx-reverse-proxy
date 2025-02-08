@@ -25,6 +25,18 @@ sudo docker run --rm -v server-certificates:/etc/letsencrypt certonly --standalo
   --email common@egorchumichev.dev
 ```
 
+### Configure Proxying for Docker Containers
+
+The Nginx configuration file is located at `./configuration/nginx.conf`. Modify this file to suit your domain requirements and ensure that it correctly proxies requests to your target Docker containers.
+
+### Start the Server
+
+Start the server using Docker Compose with the following command:
+
+```bash
+sudo docker compose -f ./docker/compose.yaml up -d
+```
+
 ## Author
 
 Configured by Egor Chumichev. Feel free to modify this template.
