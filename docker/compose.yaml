@@ -21,5 +21,5 @@ networks:
 volumes:
   server-logs:
     name: server-logs
-  server-keys:
+  server-certificates:
     name: server-certificates
