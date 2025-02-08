@@ -1,4 +1,4 @@
-name: server
+name: reverse-proxy
 
 services:
   application:
@@ -9,17 +9,17 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - server-logs:/var/logs/nginx/
-      - server-certificates:/etc/letsencrypt/
+      - reverse-proxy-logs:/var/logs/nginx/
+      - reverse-proxy-certificates:/etc/letsencrypt/
     networks:
-      - server-network
+      - reverse-proxy
 
 networks:
-  server-network:
-    name: server-network
+  reverse-proxy:
+    name: reverse-proxy
 
 volumes:
-  server-logs:
-    name: server-logs
-  server-certificates:
-    name: server-certificates
+  reverse-proxy-logs:
+    name: reverse-proxy-logs
+  reverse-proxy-certificates:
+    name: reverse-proxy-certificates

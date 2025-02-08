@@ -8,10 +8,10 @@ The application is intended to run in a Docker container.
 
 ### Create Docker Volume
 
-Create a `server-certificates` volume to store SSL certificates:
+Create a `reverse-proxy-certificates` volume to store SSL certificates:
 
 ```bash
-sudo docker volume create server-certificates
+sudo docker volume create reverse-proxy-certificates
 ```
 
 ### Obtain SSL Certificates
@@ -19,7 +19,7 @@ sudo docker volume create server-certificates
 Obtain Let's Encrypt certificates using the following command:
 
 ```bash
-sudo docker run --rm -p 80:80 -v server-certificates:/etc/letsencrypt certbot/certbot certonly --standalone --non-interactive \
+sudo docker run --rm -p 80:80 -v reverse-proxy-certificates:/etc/letsencrypt certbot/certbot certonly --standalone --non-interactive \
   --agree-tos --preferred-challenges http \
   -d egorchumichev.dev -d platform.egorchumichev.dev -d registry.egorchumichev.dev \
   --email common@egorchumichev.dev
