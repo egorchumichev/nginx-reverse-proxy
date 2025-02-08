@@ -1,4 +1,4 @@
-# Reverse Proxy Server
+# Nginx Reverse Proxy
 
 This repository contains the configuration for Nginx acting as a Reverse Proxy. It is assumed that when deployed, this web server will be the only application receiving requests from the external network.
 
@@ -8,10 +8,10 @@ The application is intended to run in a Docker container.
 
 ### Create Docker Volume
 
-Create a `reverse-proxy-certificates` volume to store SSL certificates:
+Create a `nginx-reverse-proxy-certificates` volume to store SSL certificates:
 
 ```bash
-sudo docker volume create reverse-proxy-certificates
+sudo docker volume create nginx-reverse-proxy-certificates
 ```
 
 ### Obtain SSL Certificates
@@ -19,10 +19,11 @@ sudo docker volume create reverse-proxy-certificates
 Obtain Let's Encrypt certificates using the following command:
 
 ```bash
-sudo docker run --rm -p 80:80 -v reverse-proxy-certificates:/etc/letsencrypt certbot/certbot certonly --standalone --non-interactive \
-  --agree-tos --preferred-challenges http \
-  -d egorchumichev.dev -d platform.egorchumichev.dev -d registry.egorchumichev.dev \
-  --email common@egorchumichev.dev
+sudo docker run --rm -p 80:80 -v nginx-reverse-proxy-certificates:/etc/letsencrypt \
+  certbot/certbot certonly \
+  --standalone --non-interactive --agree-tos --preferred-challenges http \
+  -d example.com -d www.example.com \
+  --email support@example.com
 ```
 
 ### Configure Proxying for Docker Containers

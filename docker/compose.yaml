@@ -1,4 +1,4 @@
-name: reverse-proxy
+name: nginx-reverse-proxy
 
 services:
   application:
@@ -20,6 +20,6 @@ networks:
 
 volumes:
   reverse-proxy-logs:
-    name: reverse-proxy-logs
+    name: nginx-reverse-proxy-logs
   reverse-proxy-certificates:
-    name: reverse-proxy-certificates
+    name: nginx-reverse-proxy-certificates
