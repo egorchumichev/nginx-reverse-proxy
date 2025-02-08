@@ -1,23 +1,6 @@
-FROM certbot/certbot:latest AS validator
+FROM nginx:latest
 
-ARG DEPLOY_PRIMARY_DOMAIN
-ARG DEPLOY_DOMAINS
-ARG DEPLOY_DOMAINS_MAPPER
-ARG DEPLOY_EMAIL
-
-RUN certbot certonly --standalone --non-interactive \
-  --agree-tos --preferred-challenges http \
-  --email ${DEPLOY_EMAIL} -d "${DEPLOY_DOMAINS}"
-
-FROM nginx:latest AS runner
-
-COPY --from=validator /etc/letsencrypt/live/$DEPLOY_PRIMARY_DOMAIN/fullchain.pem /etc/nginx/ssl/fullchain.pem
-COPY --from=validator /etc/letsencrypt/live/$DEPLOY_PRIMARY_DOMAIN/privkey.pem /etc/nginx/ssl/privkey.pem
-
-RUN echo "${DEPLOY_DOMAINS_MAPPER}" > /etc/nginx/router.conf
-RUN echo "server_name ${DEPLOY_DOMAINS};" > /etc/nginx/domains.conf
-
-COPY ./configuration/nginx.conf /etc/nginx/nginx.conf
+COPY ./configuration/ /etc/nginx/
 
 EXPOSE 80 443
 

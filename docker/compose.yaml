@@ -4,17 +4,13 @@ services:
   application:
     build:
       context: ./../
-      dockerfile: dockerfile
-      args:
-        - DEPLOY_PRIMARY_DOMAIN=${DEPLOY_PRIMARY_DOMAIN}
-        - DEPLOY_DOMAINS=${DEPLOY_DOMAINS}
-        - DEPLOY_DOMAINS_MAPPER=${DEPLOY_DOMAINS_MAPPER}
-        - DEPLOY_EMAIL=${DEPLOY_EMAIL}
+      dockerfile: ./docker/dockerfile
     ports:
       - 80:80
       - 443:443
     volumes:
       - server-logs:/var/logs/nginx/
+      - server-certificates:/etc/letsencrypt/
     networks:
       - server-network
 
@@ -25,3 +21,5 @@ networks:
 volumes:
   server-logs:
     name: server-logs
+  server-keys:
+    name: server-certificates
