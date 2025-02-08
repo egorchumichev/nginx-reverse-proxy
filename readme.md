@@ -19,7 +19,7 @@ sudo docker volume create server-certificates
 Obtain Let's Encrypt certificates using the following command:
 
 ```bash
-sudo docker run --rm -v server-certificates:/etc/letsencrypt certonly --standalone --non-interactive \
+sudo docker run --rm -p 80:80 -v server-certificates:/etc/letsencrypt certbot/certbot certonly --standalone --non-interactive \
   --agree-tos --preferred-challenges http \
   -d egorchumichev.dev -d platform.egorchumichev.dev -d registry.egorchumichev.dev \
   --email common@egorchumichev.dev
